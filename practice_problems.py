@@ -13,9 +13,15 @@ Output: False
 """
 
 def has_duplicates(product_ids):
-    # Your implementation here
-    pass
+    if len(product_ids) != len(set(product_ids)):
+        return True
+    else:
+        return False
 
+"""
+Solution: I chose to compare the list with a set. Since we are just checking if duplicates are found, comparing the
+length of a list to the length of the list as a set allows us to see if there are any duplicates in the list. 
+"""
 
 """
 Problem 2: Order Manager
@@ -32,14 +38,29 @@ task_queue.remove_oldest_task() → "Email follow-up"
 
 class TaskQueue:
     def __init__(self):
-        # Your initialization here
-        pass
+        self.front = None
+        self.rear = None
 
     def add_task(self, task):
-        pass
-
+        new_node = Node(task)
+        if not self.front:
+            self.front = new_node
+            self.rear = new_node
+        else:
+            self.rear.next
+            self.rear = new_node
     def remove_oldest_task(self):
-        pass
+        if not self.front:
+            return None
+        removed_node = self.front
+        self.front = self.front.next
+        if not self.front:
+            self.rear = None
+        return removed_node.value
+"""
+Solution: I chose a queue since we are dealing with data in a first in, first out capacity. This fits the problem because it is
+accepting a list of tasks, adding tasks to the queue, but completing the oldest tasks first. The structure allows for the
+"""
 
 
 """
@@ -63,4 +84,18 @@ class UniqueTracker:
         pass
 
     def get_unique_count(self):
+
         pass
+
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+def main():
+    list_1=[10, 20, 30, 20, 40]
+    list_2=[1, 2, 3, 4, 5]
+    print(has_duplicates(list_1))
+    print(has_duplicates(list_2))
+
+main()
